@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.header{
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f2f2f2;
+    background-color: #000;
+}
+
+.categorias{
+    width: 100vw;
+    height: 80vh;
+}
+
+.categoria{
+    height: 40%;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: red;
+    border-bottom: 3px solid white;
+}
+
+.categoria__datos{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    color: #f2f2f2;
+}
+
+.categoria__nombre{
+    margin-bottom: 20px;
+    font-size: 45px;
+}
+
+.categoria__imagen{
+    width: 100%;
+    position: absolute;
+    opacity: 0.4;
+}
+
+[data-categoria="carrete2"]{
+    background-color: lightseagreen;
+}
+
+[data-categoria="carrete3"]{
+    background-color: lightsalmon;
+}

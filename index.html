@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="galeria.css">
+    <script src="script.js" defer></script>
+    <title>Galeria analógicas</title>
+</head>
+<body>
+    <header class="header">
+        <h1 class="header__titulo">nombre</h1>
+    </header>
+    <main class="categorias" id="categorias">
+        <div class="categoria" data-categoria="carrete1">
+                <img class="categoria__imagen" src="./img/ciudad.jpg" alt="">
+            
+            <div class="categoria__datos">
+                <p class="categoria__nombre">Carrete 1</p>
+                <p class="categoria__numero-fotos">20 fotos</p>
+            </div>
+        </div>
+        <div class="categoria" data-categoria="carrete2">
+                <img class="categoria__imagen" src="./img/playa.jpg" alt="">
+            <div class="categoria__datos">
+                <p class="categoria__nombre">Carrete 2</p>
+                <p class="categoria__numero-fotos">16 fotos</p>
+            </div>
+        </div>
+        <div class="categoria" data-categoria="carrete3">
+                <img class="categoria__imagen" src="./img/ruru.jpg" alt="">
+            <div class="categoria__datos">
+                <p class="categoria__nombre">Carrete 3</p>
+                <p class="categoria__numero-fotos">35 fotos</p>
+            </div>
+        </div>
+    </main>
+    <section class="galeria" id="galeria">
+        <div class="galeria__overlay" data-accion="cerrar-galeria">
+            <div class="galeria__contenedor">
+                <div class="galeria__contenedor-titulo">
+                    <h3 class="galeria__titulo"></h3>
+                    <button class="galeria__btn" data-accion="cerrar-galeria">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="galeria__icono-boton"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <div class="galeria__contenedor-imagen-activa" id="imagenActiva">
+                    <img src="./img/ciudad/1.jpg" class="galeria__imagen" />
+                </div>
+                <div class="galeria__contenedor-carousel">
+                    <p class="galeria__descripcion-imagen-activa"></p>
+                    <div class="galeria__carousel">
+                        <div class="galeria__carousel-atras">
+                            <button class="galeria__btn" data-accion="anterior-slide">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="galeria__icono-boton"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="galeria__carousel-slides">
+
+                        </div>
+                        <div class="galeria__carousel-adelante">
+                            <button class="galeria__btn" data-accion="siguiente-slide">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="galeria__icono-boton"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de Anterior y Siguiente -->
+                <button class="galeria__btn galeria__btn--anterior" data-accion="anterior-imagen">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        class="galeria__icono-boton"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                        />
+                    </svg>
+                </button>
+                <button class="galeria__btn galeria__btn--siguiente" data-accion="siguiente-imagen">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        class="galeria__icono-boton"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
