@@ -5,7 +5,7 @@ const contenedorCategorias = document.getElementById('categorias');
 categorias.forEach((categ) => {
     const nuevaCategoria = document.createElement('div');
     const plantilla = `
-        <img class="categoria__img" src="${categ.imagenPortada}" alt="" />
+        <img class="categoria__imagen" src="${categ.imagenPortada}" alt="" />
         <div class="categoria__datos">
         <p class="categoria__nombre">${categ.nombre}</p>
         <p class="categoria__numero-fotos">${categ.numeroFotos} fotos</p>

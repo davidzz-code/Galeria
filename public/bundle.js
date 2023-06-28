@@ -450,7 +450,7 @@ const contenedorCategorias$1 = document.getElementById('categorias');
 categorias.forEach((categ) => {
     const nuevaCategoria = document.createElement('div');
     const plantilla = `
-        <img class="categoria__img" src="${categ.imagenPortada}" alt="" />
+        <img class="categoria__imagen" src="${categ.imagenPortada}" alt="" />
         <div class="categoria__datos">
         <p class="categoria__nombre">${categ.nombre}</p>
         <p class="categoria__numero-fotos">${categ.numeroFotos} fotos</p>
@@ -548,9 +548,9 @@ contenedorCategorias.addEventListener('click', (e) => {
 
         fotos.forEach((foto) => {
             const slide = 
-                `<a href="#" class="galeria__carousel-slide">
+                `<div class="galeria__carousel-slide">
                 <img class="galeria__carousel-image" src="${foto.ruta}" data-id="${foto.id}" alt="" />
-                </a>
+                </div>
             `;
 
             galeria$3.querySelector('.galeria__carousel-slides').innerHTML += slide;

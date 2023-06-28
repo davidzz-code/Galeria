@@ -26,9 +26,9 @@ contenedorCategorias.addEventListener('click', (e) => {
 
         fotos.forEach((foto) => {
             const slide = 
-                `<a href="#" class="galeria__carousel-slide">
+                `<div class="galeria__carousel-slide">
                 <img class="galeria__carousel-image" src="${foto.ruta}" data-id="${foto.id}" alt="" />
-                </a>
+                </div>
             `;
 
             galeria.querySelector('.galeria__carousel-slides').innerHTML += slide;

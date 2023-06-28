@@ -1,3 +1,3 @@
 import './cargarCategorias';
 import './eventoCategorias';
-import './galeria/eventosGaleria'
+import './galeria/eventosGaleria';
