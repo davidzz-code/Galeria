@@ -10,4 +10,4 @@ export default {
         { id: 'oceania', nombre: 'Oceania', numeroFotos: fotos.oceania.length, imagenPortada: './img/oceania.jpg' },
         { id: 'antartida', nombre: 'Antartida', numeroFotos: fotos.antartida.length, imagenPortada: './img/antartida.jpg' }
     ]
-};
+}; 

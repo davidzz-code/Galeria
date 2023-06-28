@@ -1,9 +1,9 @@
-import dataCategorias from './datos/categorias';
+import dataCategorias from './datos/categoria';
 const { categorias } = dataCategorias;
 const contenedorCategorias = document.getElementById('categorias');
 
 categorias.forEach((categ) => {
-    const nuevaCategoria = document.createElement('a');
+    const nuevaCategoria = document.createElement('div');
     const plantilla = `
         <img class="categoria__img" src="${categ.imagenPortada}" alt="" />
         <div class="categoria__datos">
@@ -14,7 +14,6 @@ categorias.forEach((categ) => {
 
     nuevaCategoria.innerHTML = plantilla;
     nuevaCategoria.classList.add('categoria');
-    nuevaCategoria.href = '#';
     nuevaCategoria.dataset.categoria = categ.id;
 
 
