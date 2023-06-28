@@ -1,6 +1,6 @@
 'use strict';
 
-var data = {
+var datos = {
 	fotos: {
 		america: [
 			{
@@ -431,7 +431,7 @@ var data = {
 	},
 };
 
-const { fotos } = data;
+const { fotos } = datos;
 
 var dataCategorias = {
     categorias: [
@@ -445,7 +445,7 @@ var dataCategorias = {
 };
 
 const { categorias } = dataCategorias;
-const contenedorCategorias = document.getElementById('categorias');
+const contenedorCategorias$1 = document.getElementById('categorias');
 
 categorias.forEach((categ) => {
     const nuevaCategoria = document.createElement('div');
@@ -462,5 +462,218 @@ categorias.forEach((categ) => {
     nuevaCategoria.dataset.categoria = categ.id;
 
 
-    contenedorCategorias.append(nuevaCategoria);
+    contenedorCategorias$1.append(nuevaCategoria);
+});
+
+const galeria$4 = document.getElementById('galeria');
+
+const cargarImagen = (id, nombre, ruta, descripcion) => {
+    galeria$4.querySelector('.galeria__imagen').src = ruta;
+    galeria$4.querySelector('.galeria__imagen').dataset.idImagen = id;
+    galeria$4.querySelector('.galeria__titulo').innerText = nombre;
+    galeria$4.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
+
+    const categoriaActual = galeria$4.dataset.categoria;
+    const fotos = datos.fotos[categoriaActual];
+
+    // Selecciona el index de la imagen que se carga 
+    let indexImagenActual;
+    fotos.forEach((foto, index) => {
+        if (foto.id === id) {
+            indexImagenActual = index;
+        }    });
+    
+    
+    if (galeria$4.querySelectorAll('.galeria__carousel-slide').length > 0) {
+        // Eliminamos la calse active de cualquier slide
+        galeria$4.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
+        
+        // Marcamos la clase active de cualquier slide
+        galeria$4.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
+    }
+};
+
+
+const cargarAnteriorSiguiente = (direccion) => {
+    const categoriaActual = galeria$4.dataset.categoria;
+    const fotos = datos.fotos[categoriaActual];
+
+    // Pasamos el id a un 'number' porque lo estamos igualando en el siguiente condicional
+    const idImagenActual = parseInt(galeria$4.querySelector('.galeria__imagen').dataset.idImagen);
+
+
+    let indexImagenActual;
+    fotos.forEach((foto, index) => {
+        if (foto.id === idImagenActual) {
+            indexImagenActual = index;
+        }
+    });
+
+    if (direccion === 'siguiente') {
+        if (fotos[indexImagenActual + 1]) {
+            const {id, nombre, ruta, descripcion} =  fotos[indexImagenActual + 1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
+        
+    } else if (direccion === 'anterior') {
+        if (fotos[indexImagenActual - 1]) {
+            const {id, nombre, ruta, descripcion} =  fotos[indexImagenActual - 1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
+    }
+};
+
+const contenedorCategorias = document.getElementById('categorias');
+const galeria$3 = document.getElementById('galeria');
+
+contenedorCategorias.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (e.target.closest('div')) {
+        galeria$3.classList.add('galeria--active');
+        document.body.style.overflow = 'hidden';
+
+        const categoriaActiva = e.target.closest('div').dataset.categoria;
+        galeria$3.dataset.categoria = categoriaActiva;
+
+
+        const fotos = datos.fotos[categoriaActiva];
+        const carousel = galeria$3.querySelector('.galeria__carousel-slides');
+
+        const { id, nombre, ruta, descripcion } = fotos[0];
+
+        cargarImagen(id, nombre, ruta, descripcion);
+
+        carousel.innerHTML = '';
+
+        fotos.forEach((foto) => {
+            const slide = 
+                `<a href="#" class="galeria__carousel-slide">
+                <img class="galeria__carousel-image" src="${foto.ruta}" data-id="${foto.id}" alt="" />
+                </a>
+            `;
+
+            galeria$3.querySelector('.galeria__carousel-slides').innerHTML += slide;
+        });
+
+        galeria$3.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
+    }});
+
+const galeria$2 = document.getElementById('galeria');
+
+const cerrarGaleria = () => {
+    galeria$2.classList.remove('galeria--active');
+    document.body.style.overflow = '';
+};
+
+const slideClick = (e) => {
+    let ruta, nombre, descripcion;
+
+
+    const id = parseInt(e.target.dataset.id);
+    const galeria = document.getElementById('galeria');
+
+    const categoriaActiva = galeria.dataset.categoria;
+
+    datos.fotos[categoriaActiva].forEach((foto) => {
+        if (foto.id === id) {
+            ruta = foto.ruta;
+            nombre = foto.nombre;
+            descripcion = foto.descripcion;
+        }
+    });
+
+    cargarImagen(id, nombre, ruta, descripcion);
+
+};
+
+const galeria$1 = document.getElementById('galeria');
+
+const carousel = (direccion) => {
+    const opciones = {
+        root: document.querySelector('.galeria__carousel'),
+        rootMargin: '0px',
+        threshold: 0.9,
+    };
+
+
+    const observer = new IntersectionObserver((entradas) => {
+
+        const slidesVisibles = entradas.filter((entrada) => {
+            if (entrada.isIntersecting === true) {
+                return entrada;
+            }
+        });
+
+        if (direccion === 'atras') {            
+            const primerSlideVisible = slidesVisibles[0];
+            const indexPrimerSlideVisible = entradas.indexOf(primerSlideVisible);
+
+            if (indexPrimerSlideVisible >= 1) {
+                entradas[indexPrimerSlideVisible - 1].target.scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'start'
+                });
+            }
+
+
+        } else if (direccion === 'adelante') {
+            const ultimoSlideVisible = slidesVisibles[slidesVisibles.length - 1];
+            const indexUltimoSlideVisible = entradas.indexOf(ultimoSlideVisible);
+            
+            if (entradas.length - 1 > indexUltimoSlideVisible) {
+                entradas[indexUltimoSlideVisible + 1].target.scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'start'
+                });
+            }        }
+
+        // Deja de observar al carousel
+        const slides = galeria$1.querySelectorAll('.galeria__carousel-slide');
+        slides.forEach((slide) => {
+            observer.unobserve(slide);
+        });
+
+    }, opciones);
+
+    const slides = galeria$1.querySelectorAll('.galeria__carousel-slide');
+    slides.forEach((slide) => {
+        observer.observe(slide);
+    });
+};
+
+const galeria = document.getElementById('galeria');
+
+galeria.addEventListener('click', (e) => {
+    const boton = e.target.closest('button');
+
+    // - - - CERRAR GALERIA
+    if (boton?.dataset?.accion === 'cerrar-galeria') { // Este condicional comprueba si se cumple la condición. En caso de que NO pues no pasa nada (sirve para evitar errores)
+        cerrarGaleria();
+    }
+
+    // - - - CAROUSEL SLIDE CLICK
+    if (e.target.dataset.id) { 
+        slideClick(e);
+    }
+    
+    // - - -  SIGUIENTE IMAGEN
+    if (boton?.dataset?.accion === 'siguiente-imagen') {
+        cargarAnteriorSiguiente('siguiente');
+    }
+    
+    // - - -  ANTERIOR IMAGEN
+    if (boton?.dataset?.accion === 'anterior-imagen') {
+        cargarAnteriorSiguiente('anterior');
+    }
+
+    // - - - CAROUSEL ADELANTE
+    if (boton?.dataset?.accion === 'siguiente-slide') {
+        carousel('adelante');
+    }
+    
+    // - - - CAROUSEL ATRÁS
+    if (boton?.dataset?.accion === 'anterior-slide') {
+        carousel('atras');
+    }
 });
