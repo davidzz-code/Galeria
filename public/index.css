@@ -46,7 +46,13 @@
 .categoria__img{
     width: 100%;
     position: absolute;
-    opacity: 0.4;
+    opacity: 0.3;
+    transition: 0.3s ease;
+}
+
+.categoria:hover img{
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 [data-categoria="america"]{
