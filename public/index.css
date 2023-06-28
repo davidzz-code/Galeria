@@ -1,22 +1,23 @@
+@import url('https://fonts.cdnfonts.com/css/modern-age');
+
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Modern Age', sans-serif;
 }
 
-.header{
-    height: 10vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #f2f2f2;
-    background-color: #000;
+.header-nombre{
+    margin: 20px;
+    position: fixed;
+    color: #1e1e1e;
+    z-index: 2;
+    font-size: 10px;
 }
 
 .categorias{
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
 }
 
 .categoria{
@@ -27,7 +28,7 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid #1e1e1e;
 }
 
 .categoria__datos{
@@ -43,7 +44,7 @@
     font-size: 45px;
 }
 
-.categoria__img{
+.categoria__imagen{
     width: 100%;
     position: absolute;
     opacity: 0.3;
